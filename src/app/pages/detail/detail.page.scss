@@ -1,0 +1,98 @@
+/* BACKGROUND */
+.detail-bg {
+  --background: linear-gradient(135deg, #021a13, #063d2c);
+  color: white;
+  padding: 15px;
+}
+
+/* TOP BAR */
+.top-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* HERO IMAGE */
+.hero-img {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+.hero-img img {
+  width: 90%;
+  max-width: 300px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* CARD */
+.glass {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+
+  padding: 20px;
+  border-radius: 20px;
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* TITLE */
+h1 {
+  text-align: center;
+}
+
+/* CONFIDENCE */
+.confidence-box {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.progress {
+  height: 12px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.progress-fill {
+  height: 100%;
+  transition: width 1s ease;
+}
+
+/* WARNA */
+.high { background: #2ecc71; }
+.medium { background: #f1c40f; }
+.low { background: #e74c3c; }
+
+/* INFO */
+.info {
+  margin-top: 20px;
+}
+
+/* INSIGHT */
+.insight {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.1);
+}
+
+/* ANIMASI */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.5s forwards;
+}
+
+.delay-1 {
+  animation-delay: 0.2s;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

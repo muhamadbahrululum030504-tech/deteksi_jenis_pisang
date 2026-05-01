@@ -1,0 +1,83 @@
+/* BACKGROUND */
+.history-bg {
+  --background: linear-gradient(135deg, #021a13, #063d2c);
+  color: white;
+}
+
+/* CENTER */
+.center-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 380px;
+  padding: 20px;
+}
+
+/* SEARCH */
+ion-searchbar {
+  --background: rgba(255,255,255,0.1);
+  border-radius: 12px;
+}
+
+/* FILTER */
+.filter {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.filter button {
+  flex: 1;
+  padding: 6px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255,255,255,0.1);
+  color: white;
+}
+
+.filter .active {
+  background: #f4d03f;
+  color: black;
+}
+
+/* LIST ITEM */
+ion-item {
+  --background: rgba(255,255,255,0.05);
+  border-radius: 15px;
+  margin-bottom: 10px;
+}
+
+/* CONFIDENCE */
+.confidence {
+  margin-top: 5px;
+  padding: 4px 8px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.high { background: #2ecc71; }
+.medium { background: #f1c40f; color: black; }
+.low { background: #e74c3c; }
+
+/* ANIMASI */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.5s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* EMPTY */
+.empty {
+  text-align: center;
+  margin-top: 40px;
+}

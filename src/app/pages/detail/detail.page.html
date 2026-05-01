@@ -1,0 +1,48 @@
+<ion-content class="detail-bg">
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <ion-button fill="clear" (click)="goBack()">
+      ←
+    </ion-button>
+    <h2>Detail</h2>
+  </div>
+
+  <!-- IMAGE -->
+  <div class="hero-img">
+    <img [src]="data?.image_url" alt="Detail pisang" />
+  </div>
+
+  <!-- CARD -->
+  <div class="card glass">
+
+    <h1>{{ getNamaPisang(data?.result) }}</h1>
+
+    <!-- CONFIDENCE -->
+    <div class="confidence-box">
+      <p>Confidence</p>
+
+      <div class="progress">
+        <div class="progress-fill"
+             [style.width]="confidenceWidth"
+             [ngClass]="getConfidenceClass(data?.confidence)">
+        </div>
+      </div>
+
+      <span>{{ data?.confidence }}%</span>
+    </div>
+
+    <!-- INFO -->
+    <div class="info">
+      <h3>📚 Informasi</h3>
+      <p>{{ getBananaInfo(data?.result) }}</p>
+    </div>
+
+    <!-- INSIGHT -->
+    <div class="insight">
+      💡 {{ getInsight() }}
+    </div>
+
+  </div>
+
+</ion-content>

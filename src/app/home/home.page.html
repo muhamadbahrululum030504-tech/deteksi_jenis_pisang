@@ -1,20 +1,63 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="home-bg">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="center-wrapper">
+    <div class="app-container">
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+      <!-- HEADER -->
+      <div class="premium-header">
+        <div class="logo">🍌</div>
+        <h2 class="app-title">Banana Scanner</h2>
+      </div>
+
+      <!-- HERO -->
+      <div class="premium-hero">
+        <h1 class="title-glow">AI Banana Detection</h1>
+        <p class="subtitle">Scan pisang dengan teknologi AI</p>
+      </div>
+
+      <!-- MENU -->
+      <div class="menu">
+
+        <div class="menu-card" (click)="pilihGambar()">
+          <div class="icon">📸</div>
+          <h3>Scan Pisang</h3>
+        </div>
+
+        <div class="menu-card" routerLink="/history">
+          <div class="icon">📊</div>
+          <h3>Riwayat</h3>
+        </div>
+
+      </div>
+
+      <!-- LOADING -->
+      <div *ngIf="loading" class="loading">
+        <ion-spinner></ion-spinner>
+        <p>AI sedang menganalisa...</p>
+      </div>
+
+      <!-- RESULT -->
+      <div *ngIf="result" class="result-box">
+
+        <img [src]="image" alt="hasil scan" />
+
+        <h2>{{ getNamaPisang(result) }}</h2>
+
+        <div class="confidence" [ngClass]="getConfidenceClass(confidence)">
+          {{ confidence }}%
+        </div>
+
+        <ion-button expand="block" (click)="goToDetail()">
+          🔍 Lihat Detail
+        </ion-button>
+
+        <ion-button expand="block" color="secondary" (click)="speakResult()">
+          🔊 Dengarkan Hasil
+        </ion-button>
+
+      </div>
+
+    </div>
   </div>
+
 </ion-content>
