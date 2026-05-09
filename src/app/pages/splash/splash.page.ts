@@ -1,22 +1,40 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-splash',
+
   standalone: true,
+
+  imports: [
+    IonicModule,
+    CommonModule
+  ],
+
   templateUrl: './splash.page.html',
   styleUrls: ['./splash.page.scss'],
-  imports: [IonicModule, CommonModule]
 })
+
 export class SplashPage implements OnInit {
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router
+  ) {}
 
   ngOnInit() {
+
     setTimeout(() => {
-      this.router.navigateByUrl('/home');
-    }, 2500); // ⏱️ durasi splash
+
+      this.router.navigate(
+        ['/home'],
+        {
+          replaceUrl: true
+        }
+      );
+
+    }, 2500);
   }
 }

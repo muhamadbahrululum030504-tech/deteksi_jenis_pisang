@@ -1,63 +1,81 @@
-<ion-content [fullscreen]="true" class="home-bg">
+<ion-content class="home-bg" [fullscreen]="true">
 
-  <div class="center-wrapper">
-    <div class="app-container">
+  <div class="container">
 
-      <!-- HEADER -->
-      <div class="premium-header">
-        <div class="logo">🍌</div>
-        <h2 class="app-title">Banana Scanner</h2>
+    <!-- HEADER -->
+    <div class="header">
+      🍌 Banana Scanner
+    </div>
+
+    <!-- HERO -->
+    <div class="hero">
+      <h1 class="title">AI Banana Detection</h1>
+      <p class="subtitle">
+        Scan pisang dengan teknologi AI
+      </p>
+    </div>
+
+    <!-- MENU -->
+    <div class="menu">
+
+      <!-- KAMERA -->
+      <div class="card" (click)="ambilKamera()">
+        <div class="icon">📸</div>
+        <h2>Kamera</h2>
       </div>
 
-      <!-- HERO -->
-      <div class="premium-hero">
-        <h1 class="title-glow">AI Banana Detection</h1>
-        <p class="subtitle">Scan pisang dengan teknologi AI</p>
+      <!-- GALERI -->
+      <div class="card" (click)="ambilGaleri()">
+        <div class="icon">🖼️</div>
+        <h2>Galeri</h2>
       </div>
 
-      <!-- MENU -->
-      <div class="menu">
+      <!-- HISTORY -->
+      <div class="card" routerLink="/history">
+        <div class="icon">📊</div>
+        <h2>Riwayat</h2>
+      </div>
 
-        <div class="menu-card" (click)="pilihGambar()">
-          <div class="icon">📸</div>
-          <h3>Scan Pisang</h3>
+    </div>
+
+    <!-- LOADING -->
+    <div *ngIf="loading" class="loading ion-text-center">
+      <ion-spinner></ion-spinner>
+      <p>AI sedang menganalisa...</p>
+    </div>
+
+    <!-- RESULT -->
+    <div *ngIf="image && !loading" class="result-card">
+
+      <img [src]="image" class="img-scan" alt="Gambar Pisang" />
+
+      <h2>{{ getNamaPisang(result) }}</h2>
+
+      <div class="confidence-bar">
+        <div class="fill" [style.width.%]="confidence">
         </div>
-
-        <div class="menu-card" routerLink="/history">
-          <div class="icon">📊</div>
-          <h3>Riwayat</h3>
-        </div>
-
       </div>
 
-      <!-- LOADING -->
-      <div *ngIf="loading" class="loading">
-        <ion-spinner></ion-spinner>
-        <p>AI sedang menganalisa...</p>
-      </div>
+      <p>{{ confidence }}%</p>
 
-      <!-- RESULT -->
-      <div *ngIf="result" class="result-box">
+      <div class="button-group">
 
-        <img [src]="image" alt="hasil scan" />
+        <button class="custom-btn detail-btn" (click)="goToDetail()">
 
-        <h2>{{ getNamaPisang(result) }}</h2>
-
-        <div class="confidence" [ngClass]="getConfidenceClass(confidence)">
-          {{ confidence }}%
-        </div>
-
-        <ion-button expand="block" (click)="goToDetail()">
           🔍 Lihat Detail
-        </ion-button>
 
-        <ion-button expand="block" color="secondary" (click)="speakResult()">
+        </button>
+
+        <button class="custom-btn speak-btn" (click)="speakResult()">
+
           🔊 Dengarkan Hasil
-        </ion-button>
+
+        </button>
 
       </div>
 
     </div>
+
   </div>
 
 </ion-content>

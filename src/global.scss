@@ -35,3 +35,13 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+ion-action-sheet.my-action-sheet {
+  z-index: 99999 !important;
+}
+
+ion-modal,
+ion-alert,
+ion-action-sheet {
+  z-index: 99999 !important;
+}

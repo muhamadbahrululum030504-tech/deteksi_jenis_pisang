@@ -1,46 +1,125 @@
-<ion-content class="detail-bg">
+<ion-content class="detail-bg" [fullscreen]="true">
 
-  <!-- TOP BAR -->
+  <!-- HEADER -->
   <div class="top-bar">
-    <ion-button fill="clear" (click)="goBack()">
+
+    <button class="back-btn" (click)="goBack()">
       ←
-    </ion-button>
-    <h2>Detail</h2>
+    </button>
+
+    <h2>🍌 Detail Scan AI</h2>
+
   </div>
 
   <!-- IMAGE -->
-  <div class="hero-img">
-    <img [src]="data?.image_url" alt="Detail pisang" />
+  <div class="hero-section">
+
+    <img
+      [src]="data?.image_url"
+      alt="Detail Pisang"
+      class="banana-image"/>
+
   </div>
 
   <!-- CARD -->
-  <div class="card glass">
+  <div class="detail-card">
 
-    <h1>{{ getNamaPisang(data?.result) }}</h1>
+    <!-- TITLE -->
+    <h1 class="banana-title">
+      {{ getNamaPisang(data?.result) }}
+    </h1>
+
+    <!-- BADGE -->
+    <div
+      class="ai-badge"
+      [ngClass]="getConfidenceClass(data?.confidence)">
+
+      {{ getAccuracyText(data?.confidence) }}
+
+    </div>
 
     <!-- CONFIDENCE -->
-    <div class="confidence-box">
-      <p>Confidence</p>
+    <div class="confidence-wrapper">
 
-      <div class="progress">
-        <div class="progress-fill"
-             [style.width]="confidenceWidth"
-             [ngClass]="getConfidenceClass(data?.confidence)">
-        </div>
+      <div class="confidence-header">
+
+        <span>Confidence AI</span>
+
+        <span class="percent">
+          {{ data?.confidence }}%
+        </span>
+
       </div>
 
-      <span>{{ data?.confidence }}%</span>
+      <!-- PROGRESS -->
+      <div class="progress-bar">
+
+        <div
+          class="progress-fill"
+          [style.width]="confidenceWidth"
+          [ngClass]="getConfidenceClass(data?.confidence)">
+        </div>
+
+      </div>
+
     </div>
 
     <!-- INFO -->
-    <div class="info">
-      <h3>📚 Informasi</h3>
-      <p>{{ getBananaInfo(data?.result) }}</p>
+    <div class="info-box">
+
+      <h3>📚 Informasi Pisang</h3>
+
+      <p>
+        {{ getBananaInfo(data?.result) }}
+      </p>
+
     </div>
 
-    <!-- INSIGHT -->
-    <div class="insight">
-      💡 {{ getInsight() }}
+    <!-- AI INSIGHT -->
+    <div class="insight-box">
+
+      <h3>🤖 Insight AI</h3>
+
+      <p>
+        {{ getInsight() }}
+      </p>
+
+    </div>
+
+    <!-- RECOMMENDATION -->
+    <div class="recommend-box">
+
+      <h3>✨ Rekomendasi</h3>
+
+      <ul>
+
+        <li>
+          {{ getRecommendation() }}
+        </li>
+
+      </ul>
+
+    </div>
+
+    <!-- BUTTON -->
+    <div class="button-group">
+
+      <button
+        class="custom-btn speak-btn"
+        (click)="speakResult()">
+
+        🔊 Dengarkan Hasil
+
+      </button>
+
+      <button
+        class="custom-btn share-btn"
+        (click)="shareResult()">
+
+        📤 Bagikan Hasil
+
+      </button>
+
     </div>
 
   </div>

@@ -1,29 +1,33 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
+
+  // SPLASH
   {
     path: '',
-    redirectTo: 'splash',
-    pathMatch: 'full'
-  },
-  {
-    path: 'splash',
     loadComponent: () =>
-      import('./pages/splash/splash.page').then(m => m.SplashPage)
+      import('./pages/splash/splash.page').then(m => m.SplashPage),
   },
+
+  // HOME
   {
     path: 'home',
     loadComponent: () =>
-      import('./home/home.page').then(m => m.HomePage)
+      import('./home/home.page').then(m => m.HomePage),
   },
+
+  // HISTORY
   {
     path: 'history',
     loadComponent: () =>
-      import('./pages/history/history.page').then(m => m.HistoryPage)
+      import('./pages/history/history.page').then(m => m.HistoryPage),
   },
+
+  // DETAIL
   {
     path: 'detail',
     loadComponent: () =>
-      import('./pages/detail/detail.page').then(m => m.DetailPage)
+      import('./pages/detail/detail.page').then(m => m.DetailPage),
   }
+
 ];

@@ -1,83 +1,276 @@
-/* BACKGROUND */
 .history-bg {
-  --background: linear-gradient(135deg, #021a13, #063d2c);
-  color: white;
+  --background: linear-gradient(135deg, #020617, #064e3b);
+
+  overflow-y: auto;
 }
 
-/* CENTER */
-.center-wrapper {
-  display: flex;
-  justify-content: center;
+ion-content {
+  --overflow: auto;
+
+  overflow-y: auto;
+
+  touch-action: auto;
 }
 
-.app-container {
-  width: 100%;
-  max-width: 380px;
+/* CONTAINER */
+.container {
   padding: 20px;
+
+  padding-bottom: 120px;
 }
 
-/* SEARCH */
-ion-searchbar {
-  --background: rgba(255,255,255,0.1);
-  border-radius: 12px;
+/* HEADER */
+.header {
+  text-align: center;
+
+  font-size: 30px;
+
+  font-weight: bold;
+
+  color: #facc15;
+
+  margin: 20px 0 30px;
 }
 
-/* FILTER */
-.filter {
-  display: flex;
-  gap: 10px;
-  margin: 10px 0;
-}
+/* LOADING */
+.loading {
+  text-align: center;
 
-.filter button {
-  flex: 1;
-  padding: 6px;
-  border-radius: 10px;
-  border: none;
-  background: rgba(255,255,255,0.1);
+  margin-top: 80px;
+
   color: white;
-}
-
-.filter .active {
-  background: #f4d03f;
-  color: black;
-}
-
-/* LIST ITEM */
-ion-item {
-  --background: rgba(255,255,255,0.05);
-  border-radius: 15px;
-  margin-bottom: 10px;
-}
-
-/* CONFIDENCE */
-.confidence {
-  margin-top: 5px;
-  padding: 4px 8px;
-  border-radius: 8px;
-  display: inline-block;
-}
-
-.high { background: #2ecc71; }
-.medium { background: #f1c40f; color: black; }
-.low { background: #e74c3c; }
-
-/* ANIMASI */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeIn 0.5s forwards;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* EMPTY */
 .empty {
   text-align: center;
-  margin-top: 40px;
+
+  margin-top: 100px;
+
+  color: white;
+}
+
+.empty-icon {
+  font-size: 80px;
+}
+
+/* CARD */
+.history-card {
+  background: rgba(255, 255, 255, 0.08);
+
+  border-radius: 30px;
+
+  padding: 20px;
+
+  margin-bottom: 30px;
+
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* IMAGE */
+.history-image {
+  width: 100%;
+
+  border-radius: 20px;
+
+  margin-bottom: 20px;
+}
+
+/* TITLE */
+.history-card h2 {
+  color: white;
+
+  font-size: 32px;
+
+  font-weight: bold;
+
+  margin-bottom: 10px;
+}
+
+/* INFO */
+.banana-info {
+  color: rgba(255, 255, 255, 0.7);
+
+  margin-bottom: 15px;
+
+  font-size: 16px;
+}
+
+/* CONFIDENCE */
+.confidence-bar {
+  width: 100%;
+
+  height: 14px;
+
+  background: rgba(255, 255, 255, 0.15);
+
+  border-radius: 20px;
+
+  overflow: hidden;
+
+  margin-bottom: 10px;
+}
+
+.fill {
+  height: 100%;
+
+  background: linear-gradient(90deg, #22c55e, #eab308);
+}
+
+.confidence-text {
+  color: white;
+
+  font-size: 24px;
+
+  margin-bottom: 20px;
+}
+
+/* BUTTON */
+.button-group {
+  margin-top: 20px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+.custom-btn {
+  width: 100%;
+
+  padding: 16px;
+
+  border: none;
+
+  border-radius: 18px;
+
+  font-size: 20px;
+
+  font-weight: bold;
+
+  color: white;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+/* EFFECT */
+.custom-btn:active {
+  transform: scale(0.96);
+}
+
+/* DETAIL BUTTON */
+.detail-btn {
+  background: linear-gradient(45deg, #facc15, #eab308);
+
+  color: #000;
+
+  box-shadow: 0 8px 25px rgba(250, 204, 21, 0.4);
+}
+
+/* DELETE BUTTON */
+.delete-btn {
+  background: linear-gradient(45deg, #ef4444, #dc2626);
+
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+}
+
+.btn-delete {
+  margin-top: 10px;
+
+  --background: #ef4444;
+  --background-activated: #dc2626;
+
+  --border-radius: 14px;
+
+  font-weight: bold;
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty {
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+
+  text-align: center;
+
+  margin-top: 120px;
+
+  padding: 20px;
+
+  animation: fadeUp 0.5s ease;
+}
+
+.empty-icon {
+
+  font-size: 90px;
+
+  margin-bottom: 20px;
+
+  animation: floating 3s ease-in-out infinite;
+}
+
+.empty h2 {
+
+  font-size: 28px;
+
+  font-weight: 800;
+
+  color: #facc15;
+
+  margin-bottom: 10px;
+}
+
+.empty p {
+
+  color: rgba(255,255,255,0.7);
+
+  font-size: 17px;
+}
+
+/* FLOAT */
+@keyframes floating {
+
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* FADE */
+@keyframes fadeUp {
+
+  from {
+
+    opacity: 0;
+
+    transform: translateY(20px);
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translateY(0px);
+  }
 }

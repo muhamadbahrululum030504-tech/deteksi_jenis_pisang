@@ -1,17 +1,40 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SplashPage } from './splash.page';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
-describe('SplashPage', () => {
-  let component: SplashPage;
-  let fixture: ComponentFixture<SplashPage>;
+import { IonicModule } from '@ionic/angular';
+import { CommonModule } from '@angular/common';
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SplashPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+@Component({
+  selector: 'app-splash',
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  standalone: true,
+
+  imports: [
+    IonicModule,
+    CommonModule
+  ],
+
+  templateUrl: './splash.page.html',
+  styleUrls: ['./splash.page.scss'],
+})
+
+export class SplashPage implements OnInit {
+
+  constructor(
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+
+    setTimeout(() => {
+
+      this.router.navigate(
+        ['/home'],
+        {
+          replaceUrl: true
+        }
+      );
+
+    }, 3000);
+  }
+}

@@ -1,73 +1,78 @@
-<ion-content class="history-bg">
+<ion-content class="history-bg" [fullscreen]="true">
 
-  <div class="center-wrapper">
-    <div class="app-container">
+  <div class="container">
 
-      <!-- HEADER -->
-      <div class="header">
-        <h2>📊 Riwayat Scan</h2>
+    <!-- HEADER -->
+    <div class="header">
+      📊 Riwayat Scan
+    </div>
+
+    <!-- LOADING -->
+    <div *ngIf="loading" class="loading">
+
+      <ion-spinner></ion-spinner>
+
+      <p>Memuat riwayat...</p>
+
+    </div>
+
+    <!-- EMPTY -->
+    <div *ngIf="!loading && filtered.length === 0" class="empty">
+
+      <div class="empty-icon">🍌</div>
+
+      <h2>Belum Ada Riwayat</h2>
+
+      <p>Hasil scan akan muncul di sini</p>
+
+    </div>
+
+    <!-- LIST -->
+    <div *ngFor="let item of filtered" class="history-card">
+
+      <!-- IMAGE -->
+      <img [src]="item.image_url" class="history-image" alt="Pisang" />
+
+      <!-- TITLE -->
+      <h2>
+        {{ getNamaPisang(item.result) }}
+      </h2>
+
+      <!-- INFO -->
+      <p class="banana-info">
+        {{ getBananaInfo(item.result) }}
+      </p>
+
+      <!-- CONFIDENCE -->
+      <div class="confidence-bar">
+
+        <div class="fill" [style.width.%]="item.confidence"></div>
+
       </div>
 
-      <!-- SEARCH -->
-      <ion-searchbar
-        placeholder="Cari hasil..."
-        (ionInput)="onSearch($event)">
-      </ion-searchbar>
+      <p class="confidence-text">
+        {{ item.confidence }}%
+      </p>
 
-      <!-- FILTER -->
-      <div class="filter">
-        <button (click)="setFilter('all')" [class.active]="filter==='all'">All</button>
-        <button (click)="setFilter('high')" [class.active]="filter==='high'">High</button>
-        <button (click)="setFilter('medium')" [class.active]="filter==='medium'">Medium</button>
-        <button (click)="setFilter('low')" [class.active]="filter==='low'">Low</button>
-      </div>
+      <!-- BUTTON -->
+      <div class="button-group">
 
-      <!-- LOADING -->
-      <div *ngIf="loading" class="loading">
-        <ion-spinner></ion-spinner>
-      </div>
+        <button class="custom-btn detail-btn" (click)="goDetail(item)">
 
-      <!-- LIST -->
-      <ion-list *ngIf="!loading && filtered.length">
+          🔍 Lihat Detail
 
-        <ion-item-sliding *ngFor="let item of filtered; let i = index" class="fade-in"
-          [style.animationDelay]="i * 0.1 + 's'">
+        </button>
 
-          <ion-item (click)="goDetail(item)" lines="none">
+        <ion-button expand="block" color="danger" class="btn-delete" (click)="delete(item.id)">
 
-            <ion-thumbnail slot="start">
-              <img [src]="item.image_url" />
-            </ion-thumbnail>
+          🗑️ Hapus
 
-            <ion-label>
-              <h2>{{ getNamaPisang(item.result) }}</h2>
-              <p>{{ getBananaInfo(item.result) }}</p>
+        </ion-button>
 
-              <div class="confidence" [ngClass]="getConfidenceClass(item.confidence)">
-                {{ item.confidence }}%
-              </div>
-            </ion-label>
-
-          </ion-item>
-
-          <!-- SWIPE DELETE -->
-          <ion-item-options side="end">
-            <ion-item-option color="danger" (click)="delete(item.id)">
-              🗑️ Hapus
-            </ion-item-option>
-          </ion-item-options>
-
-        </ion-item-sliding>
-
-      </ion-list>
-
-      <!-- EMPTY -->
-      <div *ngIf="!loading && filtered.length === 0" class="empty">
-        <ion-icon name="search"></ion-icon>
-        <p>Tidak ditemukan</p>
       </div>
 
     </div>
+
   </div>
 
 </ion-content>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule, Location } from '@angular/common';
+import { TextToSpeech } from '@capacitor-community/text-to-speech';
 
 @Component({
   selector: 'app-detail',
@@ -18,7 +19,7 @@ export class DetailPage implements OnInit {
   constructor(
     private router: Router,
     private location: Location // 🔥 BACK ASLI
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.data = history.state?.data;
@@ -76,5 +77,77 @@ export class DetailPage implements OnInit {
     if (conf > 80) return 'high';
     if (conf > 50) return 'medium';
     return 'low';
+  }
+
+  // 🔊 SPEAK
+  async speakResult() {
+
+    try {
+
+      await TextToSpeech.speak({
+
+        text:
+          `Hasil scan adalah ${this.getNamaPisang(this.data?.result)}`,
+
+        lang: 'id-ID',
+
+        rate: 1.0
+      });
+
+    } catch (err) {
+
+      console.log(err);
+    }
+  }
+
+  // 📤 SHARE
+  shareResult() {
+
+    const text =
+      `Hasil scan AI:\n` +
+      `${this.getNamaPisang(this.data?.result)}\n` +
+      `Confidence: ${this.data?.confidence}%`;
+
+    navigator.clipboard.writeText(text);
+
+    alert('Hasil berhasil disalin');
+  }
+
+  // 🎯 BADGE
+  getAccuracyText(conf: number) {
+
+    if (conf >= 80) {
+      return '🟢 Sangat Akurat';
+    }
+
+    if (conf >= 50) {
+      return '🟡 Cukup Akurat';
+    }
+
+    return '🔴 Kurang Akurat';
+  }
+
+  // ✨ RECOMMENDATION
+  getRecommendation() {
+
+    const result =
+      this.data?.result;
+
+    const rec: any = {
+
+      ambon:
+        'Cocok dimakan langsung dan dibuat jus.',
+
+      raja:
+        'Sangat cocok untuk pisang goreng.',
+
+      muli:
+        'Cocok untuk camilan sehat.',
+
+      tanduk:
+        'Bagus untuk olahan dessert.'
+    };
+
+    return rec[result] || '-';
   }
 }

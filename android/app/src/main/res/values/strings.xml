@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">mobile-ionic</string>
-    <string name="title_activity_main">mobile-ionic</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="app_name">Banana Scanner AI</string>
+    <string name="title_activity_main">Banana Scanner AI</string>
+    <string name="package_name">com.akai.bananascanner</string>
+    <string name="custom_url_scheme">com.akai.bananascanner</string>
 </resources>
