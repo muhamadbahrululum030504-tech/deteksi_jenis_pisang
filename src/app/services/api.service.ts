@@ -1,79 +1,181 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Preferences } from '@capacitor/preferences';
+
+import {
+  HttpClient,
+  HttpHeaders
+} from '@angular/common/http';
+
+import { firstValueFrom } from 'rxjs';
+
+import { Device } from '@capacitor/device';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ApiService {
 
-  baseUrl = 'https://threekey.fun/api';
+  // =========================================
+  // URL BACKEND LARAVEL HOSTINGER
+  // =========================================
 
-  constructor(private http: HttpClient) {}
+  // GANTI DENGAN DOMAIN BACKEND LARAVEL
+  // CONTOH:
+  // https://api-terbenturid.site/api
 
-  // =========================
-  // GET DEVICE ID
-  // =========================
-  async getDeviceId() {
+  baseUrl = 'https://terbentur.id/api';
 
-    let { value } = await Preferences.get({
-      key: 'device_id'
-    });
+  constructor(
+    private http: HttpClient
+  ) {}
 
-    if (!value) {
+  // =========================================
+  // AMBIL DEVICE ID
+  // =========================================
 
-      value =
-        'device_' +
-        Math.random().toString(36).substring(2) +
-        Date.now();
+  async getDeviceId(): Promise<string> {
 
-      await Preferences.set({
-        key: 'device_id',
-        value
-      });
+    try {
+
+      const info = await Device.getId();
+
+      return info.identifier;
+
+    } catch (e) {
+
+      console.log('Device Error:', e);
+
+      return 'unknown-device';
     }
-
-    return value;
   }
 
-  // =========================
-  // SCAN
-  // =========================
-  async scan(file: File) {
+  // =========================================
+  // SCAN AI
+  // =========================================
 
-    const deviceId = await this.getDeviceId();
+  async scan(file: Blob) {
 
-    const formData = new FormData();
+    try {
 
-    formData.append('image', file);
+      // ambil device id
+      const deviceId = await this.getDeviceId();
 
-    formData.append('device_id', deviceId);
+      // form data
+      const formData = new FormData();
 
-    return this.http.post(
-      `${this.baseUrl}/scan`,
-      formData
-    );
+      formData.append(
+        'image',
+        file,
+        'image.jpg'
+      );
+
+      formData.append(
+        'device_id',
+        deviceId
+      );
+
+      // request ke laravel
+      const response = await firstValueFrom(
+
+        this.http.post(
+
+          `${this.baseUrl}/scan`,
+
+          formData
+
+        )
+      );
+
+      return response;
+
+    } catch (error) {
+
+      console.log('SCAN ERROR:', error);
+
+      throw error;
+    }
   }
 
-  // =========================
-  // HISTORY
-  // =========================
+  // =========================================
+  // HISTORY DEVICE
+  // =========================================
+
   async getHistory() {
 
-    const deviceId = await this.getDeviceId();
+    try {
 
-    return this.http.get(
-      `${this.baseUrl}/history?device_id=${deviceId}`
-    );
+      const deviceId = await this.getDeviceId();
+
+      const response = await firstValueFrom(
+
+        this.http.get(
+
+          `${this.baseUrl}/history/${deviceId}`
+
+        )
+      );
+
+      return response;
+
+    } catch (error) {
+
+      console.log('HISTORY ERROR:', error);
+
+      throw error;
+    }
   }
 
-  // =========================
-  // DELETE
-  // =========================
-  delete(id: number) {
+  // =========================================
+  // DETAIL HISTORY
+  // =========================================
 
-    return this.http.delete(
-      `${this.baseUrl}/history/${id}`
-    );
+  async getDetail(id: number) {
+
+    try {
+
+      const response = await firstValueFrom(
+
+        this.http.get(
+
+          `${this.baseUrl}/detail/${id}`
+
+        )
+      );
+
+      return response;
+
+    } catch (error) {
+
+      console.log('DETAIL ERROR:', error);
+
+      throw error;
+    }
+  }
+
+  // =========================================
+  // DELETE HISTORY
+  // =========================================
+
+  async delete(id: number) {
+
+    try {
+
+      const response = await firstValueFrom(
+
+        this.http.delete(
+
+          `${this.baseUrl}/history/${id}`
+
+        )
+      );
+
+      return response;
+
+    } catch (error) {
+
+      console.log('DELETE ERROR:', error);
+
+      throw error;
+    }
   }
 }

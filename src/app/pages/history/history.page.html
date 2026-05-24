@@ -1,73 +1,70 @@
-<ion-content class="history-bg" [fullscreen]="true">
+<ion-content class="history-bg">
 
   <div class="container">
 
-    <!-- HEADER -->
     <div class="header">
-      📊 Riwayat Scan
-    </div>
-
-    <!-- LOADING -->
-    <div *ngIf="loading" class="loading">
-
-      <ion-spinner></ion-spinner>
-
-      <p>Memuat riwayat...</p>
-
+      📊 Riwayat Deteksi
     </div>
 
     <!-- EMPTY -->
-    <div *ngIf="!loading && filtered.length === 0" class="empty">
-
-      <div class="empty-icon">🍌</div>
-
+    <div *ngIf="history.length === 0" class="empty">
       <h2>Belum Ada Riwayat</h2>
-
-      <p>Hasil scan akan muncul di sini</p>
-
     </div>
 
-    <!-- LIST -->
-    <div *ngFor="let item of filtered" class="history-card">
+    <!-- CARD -->
+    <div class="history-card" *ngFor="let item of history">
 
-      <!-- IMAGE -->
-      <img [src]="item.image_url" class="history-image" alt="Pisang" />
+      <!-- GAMBAR -->
+      <div class="image-wrapper">
 
-      <!-- TITLE -->
-      <h2>
-        {{ getNamaPisang(item.result) }}
-      </h2>
-
-      <!-- INFO -->
-      <p class="banana-info">
-        {{ getBananaInfo(item.result) }}
-      </p>
-
-      <!-- CONFIDENCE -->
-      <div class="confidence-bar">
-
-        <div class="fill" [style.width.%]="item.confidence"></div>
+        <img
+          [src]="item.image"
+          class="history-img"
+          alt="gambar"
+          loading="lazy"
+          referrerpolicy="no-referrer"
+        />
 
       </div>
 
-      <p class="confidence-text">
-        {{ item.confidence }}%
-      </p>
+      <!-- CONTENT -->
+      <div class="history-content">
+
+        <h2>🍌 Pisang {{ item.nama | titlecase }}</h2>
+
+        <div class="confidence-box">
+
+          <div class="confidence-bar">
+            <div
+              class="fill"
+              [style.width.%]="item.confidence">
+            </div>
+          </div>
+
+          <span>{{ item.confidence }}%</span>
+
+        </div>
+
+        <p class="date">
+          🕒 {{ item.date }}
+        </p>
+
+      </div>
 
       <!-- BUTTON -->
       <div class="button-group">
 
-        <button class="custom-btn detail-btn" (click)="goDetail(item)">
-
-          🔍 Lihat Detail
-
+        <button
+          class="detail-btn"
+          (click)="lihatDetail(item)">
+          🔍 Detail
         </button>
 
-        <ion-button expand="block" color="danger" class="btn-delete" (click)="delete(item.id)">
-
-          🗑️ Hapus
-
-        </ion-button>
+        <button
+          class="delete-btn"
+          (click)="hapusRiwayat(item.id)">
+          🗑 Hapus
+        </button>
 
       </div>
 

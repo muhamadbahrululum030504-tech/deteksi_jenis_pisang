@@ -1,294 +1,99 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule, AlertController } from '@ionic/angular';
-import { CommonModule, NgFor, NgIf } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-
-import { TextToSpeech } from '@capacitor-community/text-to-speech';
-
-import { ApiService } from '../../services/api.service';
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-history',
-  standalone: true,
   templateUrl: './history.page.html',
   styleUrls: ['./history.page.scss'],
-  imports: [
-    IonicModule,
-    CommonModule,
-    RouterModule,
-    NgFor,
-    NgIf,
-    FormsModule
-  ]
+  standalone: true,
+  imports: [CommonModule, IonicModule],
 })
-
 export class HistoryPage implements OnInit {
 
   history: any[] = [];
-  filtered: any[] = [];
-
-  loading = true;
-
-  keyword = '';
-
-  filter:
-    'all' |
-    'high' |
-    'medium' |
-    'low' = 'all';
+  loading = false;
 
   constructor(
-    private api: ApiService,
     private router: Router,
-    private alertCtrl: AlertController
-  ) { }
+    private api: ApiService
+  ) {}
 
-  // =========================
-  // INIT
-  // =========================
-  ngOnInit() {
-    this.loadData();
+  async ngOnInit() {
+    await this.loadHistory();
+  }
+
+  async ionViewWillEnter() {
+    await this.loadHistory();
   }
 
   // =========================
-  // LOAD DATA
+  // LOAD HISTORY
   // =========================
-  async loadData() {
+  async loadHistory() {
 
-    this.loading = true;
+    try {
 
-    (await this.api.getHistory()).subscribe({
+      this.loading = true;
 
-      next: (res: any) => {
+      const res: any = await this.api.getHistory();
 
-        console.log(res);
+      console.log('HISTORY:', res);
 
-        this.history = res.data || [];
+      this.history = (res.data || []).map((item: any) => {
+        console.log('IMAGE URL:', item.image_url);
 
-        this.applyFilter();
-
-        this.loading = false;
-      },
-
-      error: (err: any) => {
-
-        console.log(err);
-
-        window.alert('Gagal ambil data');
-
-        this.loading = false;
-      }
-    });
-  }
-
-  // =========================
-  // FILTER DATA
-  // =========================
-  applyFilter() {
-
-    const kw =
-      this.keyword.toLowerCase();
-
-    this.filtered =
-      this.history.filter(item => {
-
-        const matchText =
-          (item.result || '')
-            .toLowerCase()
-            .includes(kw);
-
-        let matchConf = true;
-
-        if (this.filter === 'high') {
-          matchConf = item.confidence > 80;
-        }
-
-        if (this.filter === 'medium') {
-          matchConf =
-            item.confidence <= 80 &&
-            item.confidence > 50;
-        }
-
-        if (this.filter === 'low') {
-          matchConf = item.confidence <= 50;
-        }
-
-        return matchText && matchConf;
+        return {
+          id: item.id,
+          nama: item.result,
+          confidence: Number(item.confidence),
+          image: item.image_url,
+          date: item.created_at
+        };
       });
-  }
 
-  // =========================
-  // SEARCH
-  // =========================
-  onSearch(ev: any) {
+      console.log('DATA HISTORY:', this.history);
 
-    this.keyword =
-      ev.detail.value || '';
+    } catch (error) {
 
-    this.applyFilter();
-  }
+      console.log('ERROR HISTORY:', error);
 
-  // =========================
-  // SET FILTER
-  // =========================
-  setFilter(
-    f: 'all' | 'high' | 'medium' | 'low'
-  ) {
+    } finally {
 
-    this.filter = f;
-
-    this.applyFilter();
+      this.loading = false;
+    }
   }
 
   // =========================
   // DETAIL
   // =========================
-  goDetail(item: any) {
-
+  lihatDetail(item: any) {
     this.router.navigate(['/detail'], {
-
-      state: {
-        data: item
+      queryParams: {
+        id: item.id,
+        nama: item.nama,
+        confidence: item.confidence,
+        image: item.image
       }
     });
   }
 
   // =========================
-  // HAPUS
+  // DELETE
   // =========================
-  async delete(id: number) {
-
-    const alert =
-      await this.alertCtrl.create({
-
-        header: 'Hapus Riwayat',
-
-        message:
-          'Yakin ingin menghapus data ini?',
-
-        buttons: [
-
-          {
-            text: 'Batal',
-            role: 'cancel'
-          },
-
-          {
-            text: 'Hapus',
-
-            handler: () => {
-
-              this.api.delete(id).subscribe({
-
-                next: () => {
-
-                  window.alert(
-                    'Berhasil dihapus'
-                  );
-
-                  this.loadData();
-                },
-
-                error: (err: any) => {
-
-                  console.log(err);
-
-                  window.alert(
-                    'Gagal menghapus'
-                  );
-                }
-              });
-            }
-          }
-        ]
-      });
-
-    await alert.present();
-  }
-
-  // =========================
-  // SPEAK
-  // =========================
-  async speakResult(result: string) {
+  async hapusRiwayat(id: number) {
 
     try {
 
-      await TextToSpeech.speak({
+      await this.api.delete(id);
 
-        text:
-          `Hasil scan ${this.getNamaPisang(result)}`,
+      await this.loadHistory();
 
-        lang: 'id-ID',
+    } catch (error) {
 
-        rate: 1.0
-      });
-
-    } catch (err) {
-
-      console.log(err);
+      console.log('DELETE ERROR:', error);
     }
-  }
-
-  // =========================
-  // CONFIDENCE COLOR
-  // =========================
-  getConfidenceClass(conf: number) {
-
-    if (conf > 80) {
-      return 'high';
-    }
-
-    if (conf > 50) {
-      return 'medium';
-    }
-
-    return 'low';
-  }
-
-  // =========================
-  // NAMA PISANG
-  // =========================
-  getNamaPisang(result: string) {
-
-    const map: any = {
-
-      ambon:
-        '🍌 Pisang Ambon',
-
-      raja:
-        '🍌 Pisang Raja',
-
-      muli:
-        '🍌 Pisang Muli',
-
-      tanduk:
-        '🍌 Pisang Tanduk'
-    };
-
-    return map[result] || result;
-  }
-
-  // =========================
-  // INFO PISANG
-  // =========================
-  getBananaInfo(result: string) {
-
-    const info: any = {
-
-      ambon:
-        'Manis dan lembut.',
-
-      raja:
-        'Cocok digoreng.',
-
-      muli:
-        'Kecil dan manis.',
-
-      tanduk:
-        'Besar untuk olahan.'
-    };
-
-    return info[result] || '-';
   }
 }

@@ -1,23 +1,16 @@
 <ion-content class="home-bg" [fullscreen]="true">
-
   <div class="container">
-
     <!-- HEADER -->
-    <div class="header">
-      🍌 Banana Scanner
-    </div>
+    <div class="header">🍌 Banana Scanner</div>
 
     <!-- HERO -->
     <div class="hero">
       <h1 class="title">AI Banana Detection</h1>
-      <p class="subtitle">
-        Scan pisang dengan teknologi AI
-      </p>
+      <p class="subtitle">Scan pisang dengan teknologi AI</p>
     </div>
 
     <!-- MENU -->
     <div class="menu">
-
       <!-- KAMERA -->
       <div class="card" (click)="ambilKamera()">
         <div class="icon">📸</div>
@@ -31,11 +24,10 @@
       </div>
 
       <!-- HISTORY -->
-      <div class="card" routerLink="/history">
+      <div class="card" [routerLink]="['/history']">
         <div class="icon">📊</div>
         <h2>Riwayat</h2>
       </div>
-
     </div>
 
     <!-- LOADING -->
@@ -46,36 +38,29 @@
 
     <!-- RESULT -->
     <div *ngIf="image && !loading" class="result-card">
-
       <img [src]="image" class="img-scan" alt="Gambar Pisang" />
 
       <h2>{{ getNamaPisang(result) }}</h2>
 
+      <p>Result Raw: {{ result }}</p>
+
+      <p>Confidence Raw: {{ confidence }}</p>
+
       <div class="confidence-bar">
-        <div class="fill" [style.width.%]="confidence">
-        </div>
+        <div class="fill" [style.width.%]="confidence"></div>
       </div>
 
-      <p>{{ confidence }}%</p>
-
       <div class="button-group">
-
         <button class="custom-btn detail-btn" (click)="goToDetail()">
-
           🔍 Lihat Detail
-
         </button>
 
-        <button class="custom-btn speak-btn" (click)="speakResult()">
+        <ion-button expand="block" class="voice-btn" (click)="speakResult()">
 
           🔊 Dengarkan Hasil
 
-        </button>
-
+        </ion-button>
       </div>
-
     </div>
-
   </div>
-
 </ion-content>

@@ -2,32 +2,54 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
 
+  // =========================
   // SPLASH
+  // =========================
   {
     path: '',
-    loadComponent: () =>
-      import('./pages/splash/splash.page').then(m => m.SplashPage),
+    redirectTo: 'splash',
+    pathMatch: 'full',
   },
 
-  // HOME
   {
-    path: 'home',
+    path: 'splash',
     loadComponent: () =>
-      import('./home/home.page').then(m => m.HomePage),
+      import('./pages/splash/splash.page').then(
+        m => m.SplashPage
+      ),
   },
 
-  // HISTORY
+  // =========================
+  // DASHBOARD
+  // =========================
   {
-    path: 'history',
+    path: 'dashboard',
     loadComponent: () =>
-      import('./pages/history/history.page').then(m => m.HistoryPage),
+      import('./pages/dashboard/dashboard.page').then(
+        m => m.DashboardPage
+      ),
   },
 
+  // =========================
   // DETAIL
+  // =========================
   {
     path: 'detail',
     loadComponent: () =>
-      import('./pages/detail/detail.page').then(m => m.DetailPage),
-  }
+      import('./pages/detail/detail.page').then(
+        m => m.DetailPage
+      ),
+  },
+
+  // =========================
+  // HISTORY
+  // =========================
+  {
+    path: 'history',
+    loadComponent: () =>
+      import('./pages/history/history.page').then(
+        m => m.HistoryPage
+      ),
+  },
 
 ];

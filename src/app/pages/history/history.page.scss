@@ -1,276 +1,110 @@
 .history-bg {
-  --background: linear-gradient(135deg, #020617, #064e3b);
-
-  overflow-y: auto;
+  --background: linear-gradient(180deg, #001428, #004d40);
 }
 
-ion-content {
-  --overflow: auto;
-
-  overflow-y: auto;
-
-  touch-action: auto;
-}
-
-/* CONTAINER */
 .container {
   padding: 20px;
-
-  padding-bottom: 120px;
 }
 
-/* HEADER */
 .header {
-  text-align: center;
-
+  color: #ffd600;
   font-size: 30px;
-
   font-weight: bold;
-
-  color: #facc15;
-
-  margin: 20px 0 30px;
-}
-
-/* LOADING */
-.loading {
-  text-align: center;
-
-  margin-top: 80px;
-
-  color: white;
-}
-
-/* EMPTY */
-.empty {
-  text-align: center;
-
-  margin-top: 100px;
-
-  color: white;
-}
-
-.empty-icon {
-  font-size: 80px;
-}
-
-/* CARD */
-.history-card {
-  background: rgba(255, 255, 255, 0.08);
-
-  border-radius: 30px;
-
-  padding: 20px;
-
-  margin-bottom: 30px;
-
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-}
-
-/* IMAGE */
-.history-image {
-  width: 100%;
-
-  border-radius: 20px;
-
   margin-bottom: 20px;
 }
 
-/* TITLE */
-.history-card h2 {
+.history-card {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 14px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.image-wrapper {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.history-img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  display: block;
+}
+
+.history-content {
+  margin-top: 14px;
+}
+
+.history-content h2 {
   color: white;
-
   font-size: 32px;
-
   font-weight: bold;
-
-  margin-bottom: 10px;
 }
 
-/* INFO */
-.banana-info {
-  color: rgba(255, 255, 255, 0.7);
-
-  margin-bottom: 15px;
-
-  font-size: 16px;
+.confidence-box {
+  margin-top: 10px;
 }
 
-/* CONFIDENCE */
 .confidence-bar {
   width: 100%;
-
-  height: 14px;
-
-  background: rgba(255, 255, 255, 0.15);
-
+  height: 10px;
+  background: rgba(255,255,255,0.2);
   border-radius: 20px;
-
   overflow: hidden;
-
-  margin-bottom: 10px;
 }
 
 .fill {
   height: 100%;
-
-  background: linear-gradient(90deg, #22c55e, #eab308);
+  background: linear-gradient(90deg, #00ff6a, #ffe600);
 }
 
-.confidence-text {
-  color: white;
-
-  font-size: 24px;
-
-  margin-bottom: 20px;
+.confidence-box span {
+  color: #ffd600;
+  font-weight: bold;
+  margin-top: 6px;
+  display: block;
 }
 
-/* BUTTON */
+.date {
+  color: #ddd;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
 .button-group {
-  margin-top: 20px;
-
   display: flex;
-
-  flex-direction: column;
-
-  gap: 14px;
+  gap: 10px;
+  margin-top: 14px;
 }
 
-.custom-btn {
-  width: 100%;
-
-  padding: 16px;
-
-  border: none;
-
-  border-radius: 18px;
-
-  font-size: 20px;
-
-  font-weight: bold;
-
-  color: white;
-
-  cursor: pointer;
-
-  transition: 0.3s;
-}
-
-/* EFFECT */
-.custom-btn:active {
-  transform: scale(0.96);
-}
-
-/* DETAIL BUTTON */
-.detail-btn {
-  background: linear-gradient(45deg, #facc15, #eab308);
-
-  color: #000;
-
-  box-shadow: 0 8px 25px rgba(250, 204, 21, 0.4);
-}
-
-/* DELETE BUTTON */
+.detail-btn,
 .delete-btn {
-  background: linear-gradient(45deg, #ef4444, #dc2626);
-
-  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
-}
-
-.btn-delete {
-  margin-top: 10px;
-
-  --background: #ef4444;
-  --background-activated: #dc2626;
-
-  --border-radius: 14px;
-
+  flex: 1;
+  border: none;
+  border-radius: 14px;
+  padding: 12px;
   font-weight: bold;
 }
 
-/* =========================
-   EMPTY STATE
-========================= */
-
-.empty {
-
-  display: flex;
-
-  flex-direction: column;
-
-  justify-content: center;
-
-  align-items: center;
-
-  text-align: center;
-
-  margin-top: 120px;
-
-  padding: 20px;
-
-  animation: fadeUp 0.5s ease;
+.detail-btn {
+  background: #ffd600;
+  color: black;
 }
 
-.empty-icon {
-
-  font-size: 90px;
-
-  margin-bottom: 20px;
-
-  animation: floating 3s ease-in-out infinite;
+.delete-btn {
+  background: #ff4d4d;
+  color: white;
 }
 
-.empty h2 {
-
-  font-size: 28px;
-
-  font-weight: 800;
-
-  color: #facc15;
-
-  margin-bottom: 10px;
-}
-
-.empty p {
-
-  color: rgba(255,255,255,0.7);
-
-  font-size: 17px;
-}
-
-/* FLOAT */
-@keyframes floating {
-
-  0% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-10px);
-  }
-
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-/* FADE */
-@keyframes fadeUp {
-
-  from {
-
-    opacity: 0;
-
-    transform: translateY(20px);
-  }
-
-  to {
-
-    opacity: 1;
-
-    transform: translateY(0px);
-  }
-}

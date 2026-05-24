@@ -1,153 +1,86 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { CommonModule, Location } from '@angular/common';
-import { TextToSpeech } from '@capacitor-community/text-to-speech';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-detail',
-  standalone: true,
   templateUrl: './detail.page.html',
   styleUrls: ['./detail.page.scss'],
-  imports: [IonicModule, CommonModule]
+  standalone: true,
+  imports: [CommonModule, IonicModule],
 })
 export class DetailPage implements OnInit {
 
-  data: any;
-  confidenceWidth = '0%';
+  id: any;
+  nama: string = '';
+  confidence: number = 0;
+  image: string = '';
+
+  informasi: string = '';
 
   constructor(
-    private router: Router,
-    private location: Location // 🔥 BACK ASLI
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
-    this.data = history.state?.data;
 
-    // 🔥 kalau tidak ada data → balik ke home
-    if (!this.data) {
-      this.router.navigate(['/']);
-      return;
-    }
+    this.route.queryParams.subscribe(params => {
 
-    // 🔥 animasi progress bar
-    setTimeout(() => {
-      this.confidenceWidth = this.data.confidence + '%';
-    }, 400);
+      console.log('DETAIL PARAMS:', params);
+
+      this.id = params['id'];
+
+      this.nama = (params['nama'] || '')
+        .replace('Pisang ', '')
+        .toLowerCase()
+        .trim();
+
+      this.confidence = Number(params['confidence']) || 0;
+
+      this.image = params['image'] || '';
+
+      console.log('DETAIL IMAGE:', this.image);
+
+      this.setInformasi();
+    });
   }
 
-  // 🔙 BACK FUNCTION (BEST PRACTICE)
-  goBack() {
-    this.location.back();
-  }
+  // =========================
+  // INFORMASI PISANG
+  // =========================
 
-  // 🍌 NAMA PISANG
-  getNamaPisang(nama: string) {
-    const map: any = {
-      ambon: '🍌 Pisang Ambon',
-      raja: '🍌 Pisang Raja',
-      muli: '🍌 Pisang Muli',
-      tanduk: '🍌 Pisang Tanduk'
-    };
-    return map[nama] || nama;
-  }
+  setInformasi() {
 
-  // 📚 INFO
-  getBananaInfo(nama: string) {
-    const info: any = {
-      ambon: 'Manis dan lembut, cocok dimakan langsung.',
-      raja: 'Legit dan cocok digoreng.',
-      muli: 'Kecil dan manis.',
-      tanduk: 'Besar dan cocok olahan.'
-    };
-    return info[nama] || '-';
-  }
-
-  // 🤖 INSIGHT AI
-  getInsight() {
-    const c = this.data?.confidence;
-
-    if (c > 80) return '🤖 AI sangat yakin dengan hasil ini.';
-    if (c > 50) return '🤖 Kemungkinan benar, tapi masih bisa meleset.';
-    return '⚠️ Confidence rendah, coba scan ulang.';
-  }
-
-  // 🎯 WARNA CONFIDENCE
-  getConfidenceClass(conf: number) {
-    if (conf > 80) return 'high';
-    if (conf > 50) return 'medium';
-    return 'low';
-  }
-
-  // 🔊 SPEAK
-  async speakResult() {
-
-    try {
-
-      await TextToSpeech.speak({
-
-        text:
-          `Hasil scan adalah ${this.getNamaPisang(this.data?.result)}`,
-
-        lang: 'id-ID',
-
-        rate: 1.0
-      });
-
-    } catch (err) {
-
-      console.log(err);
-    }
-  }
-
-  // 📤 SHARE
-  shareResult() {
-
-    const text =
-      `Hasil scan AI:\n` +
-      `${this.getNamaPisang(this.data?.result)}\n` +
-      `Confidence: ${this.data?.confidence}%`;
-
-    navigator.clipboard.writeText(text);
-
-    alert('Hasil berhasil disalin');
-  }
-
-  // 🎯 BADGE
-  getAccuracyText(conf: number) {
-
-    if (conf >= 80) {
-      return '🟢 Sangat Akurat';
-    }
-
-    if (conf >= 50) {
-      return '🟡 Cukup Akurat';
-    }
-
-    return '🔴 Kurang Akurat';
-  }
-
-  // ✨ RECOMMENDATION
-  getRecommendation() {
-
-    const result =
-      this.data?.result;
-
-    const rec: any = {
-
-      ambon:
-        'Cocok dimakan langsung dan dibuat jus.',
-
-      raja:
-        'Sangat cocok untuk pisang goreng.',
+    const data: any = {
 
       muli:
-        'Cocok untuk camilan sehat.',
+        'Pisang Muli cocok dikonsumsi langsung dan rasanya manis.',
 
-      tanduk:
-        'Bagus untuk olahan dessert.'
+      raja:
+        'Pisang Raja memiliki tekstur lembut dan sangat cocok untuk digoreng.',
+
+      kepok:
+        'Pisang Kepok sering digunakan untuk pisang goreng.',
+
+      ambon:
+        'Pisang Ambon memiliki aroma harum dan rasa manis.',
+
+      susu:
+        'Pisang Susu berukuran kecil dengan rasa yang legit.',
     };
 
-    return rec[result] || '-';
+    this.informasi =
+      data[this.nama?.toLowerCase()] ||
+      'Informasi pisang tidak tersedia.';
+  }
+
+  // =========================
+  // KEMBALI
+  // =========================
+
+  kembali() {
+    this.router.navigate(['/history']);
   }
 }
