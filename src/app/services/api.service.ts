@@ -27,7 +27,7 @@ export class ApiService {
 
   constructor(
     private http: HttpClient
-  ) {}
+  ) { }
 
   // =========================================
   // AMBIL DEVICE ID

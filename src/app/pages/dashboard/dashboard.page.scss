@@ -1,400 +1,338 @@
+/* =========================================
+   BACKGROUND
+========================================= */
+
 .home-bg {
-  --background: linear-gradient(135deg, #020617, #064e3b);
-  color: white;
+  --background: linear-gradient(180deg,
+      #001818 0%,
+      #00382d 100%);
 
-  overflow-y: auto;
+  min-height: 100vh;
 }
 
-/* CONTAINER */
+/* =========================================
+   CONTAINER
+========================================= */
+
 .container {
+  width: 100%;
+  max-width: 430px;
+
+  margin: auto;
   padding: 20px;
-  padding-bottom: 120px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* HEADER */
+/* =========================================
+   HEADER
+========================================= */
+
 .header {
+  width: 100%;
+
   text-align: center;
-  font-size: 22px;
-  font-weight: bold;
+
+  font-size: 26px;
+  font-weight: 800;
+
+  color: #ffd54f;
+
   margin-top: 10px;
-  color: #facc15;
+  margin-bottom: 20px;
+
+  letter-spacing: 0.5px;
 }
 
-/* HERO */
+/* =========================================
+   HERO
+========================================= */
+
 .hero {
+  width: 100%;
+
   text-align: center;
-  margin: 40px 0;
+
+  margin-bottom: 30px;
 }
 
 .title {
-  font-size: 28px;
-  font-weight: 800;
+  font-size: 42px;
+  font-weight: 900;
 
-  background: linear-gradient(45deg, #ffffff, #facc15);
+  line-height: 1.1;
 
-  -webkit-background-clip: text;
-  background-clip: text;
+  margin-bottom: 12px;
 
-  -webkit-text-fill-color: transparent;
+  color: white;
+}
+
+.title span {
+  color: #ffd600;
 }
 
 .subtitle {
-  margin-top: 10px;
-  opacity: 0.7;
-  font-size: 18px;
+  font-size: 17px;
+  color: #d6d6d6;
+
+  line-height: 1.5;
 }
 
-/* MENU */
+/* =========================================
+   MENU
+========================================= */
+
 .menu {
+  width: 100%;
+
   display: flex;
   flex-direction: column;
-  gap: 24px;
+
+  gap: 22px;
+
+  align-items: center;
 }
 
-/* CARD */
+/* =========================================
+   CARD
+========================================= */
+
 .card {
+  width: 100%;
+  max-width: 320px;
 
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,0.08),
-      rgba(255,255,255,0.03)
-    );
+  height: 180px;
 
-  border:
-    1px solid rgba(255,255,255,0.08);
+  border-radius: 30px;
 
-  border-radius: 32px;
+  background: linear-gradient(145deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(0, 255, 128, 0.12));
 
-  padding: 42px 22px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 
-  text-align: center;
-
-  cursor: pointer;
-
-  position: relative;
-
-  overflow: hidden;
-
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 
   box-shadow:
-    0 15px 45px rgba(0,0,0,0.45);
+    0 10px 25px rgba(0, 0, 0, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.05);
 
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-}
+  display: flex;
+  flex-direction: column;
 
-.card::before {
+  justify-content: center;
+  align-items: center;
 
-  content: '';
-
-  position: absolute;
-
-  top: -50%;
-
-  left: -50%;
-
-  width: 200%;
-
-  height: 200%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(250,204,21,0.08),
-      transparent 60%
-    );
-
-  transform: rotate(25deg);
+  transition: 0.3s ease;
 }
 
 .card:active {
-
-  transform:
-    scale(0.97);
-
-  box-shadow:
-    0 8px 20px rgba(0,0,0,0.35);
+  transform: scale(0.97);
 }
 
-/* ICON */
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* =========================================
+   ICON
+========================================= */
+
 .icon {
   font-size: 60px;
-  margin-bottom: 15px;
+
+  margin-bottom: 18px;
 }
+
+/* =========================================
+   CARD TITLE
+========================================= */
 
 .card h2 {
-  font-size: 28px;
-  font-weight: 700;
+  color: white;
+
+  font-size: 34px;
+  font-weight: 800;
+
+  margin: 0;
 }
 
-/* LOADING */
+/* =========================================
+   LOADING
+========================================= */
+
 .loading {
-  text-align: center;
-  margin-top: 30px;
+  margin-top: 40px;
+
+  color: white;
 }
 
-/* RESULT */
+.loading p {
+  margin-top: 10px;
+
+  font-size: 16px;
+}
+
+/* =========================================
+   RESULT CARD
+========================================= */
+
 .result-card {
+  width: 100%;
+  max-width: 340px;
 
   margin-top: 30px;
 
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,0.08),
-      rgba(255,255,255,0.03)
-    );
-
-  border:
-    1px solid rgba(255,255,255,0.06);
+  background: rgba(255, 255, 255, 0.08);
 
   border-radius: 28px;
 
-  padding: 22px;
+  padding: 20px;
 
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 
-  box-shadow:
-    0 15px 40px rgba(0,0,0,0.4);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+  text-align: center;
+
+  color: white;
 }
 
-/* IMAGE */
+/* =========================================
+   IMAGE
+========================================= */
+
 .img-scan {
-
   width: 100%;
-
-  border-radius: 24px;
-
-  margin-bottom: 18px;
+  height: 220px;
 
   object-fit: cover;
 
-  box-shadow:
-    0 10px 30px rgba(0,0,0,0.35);
+  border-radius: 20px;
+
+  margin-bottom: 20px;
+
+  border: 3px solid rgba(255, 255, 255, 0.08);
 }
 
-/* CONFIDENCE */
+/* =========================================
+   CONFIDENCE BAR
+========================================= */
+
 .confidence-bar {
   width: 100%;
   height: 12px;
 
-  background: rgba(255,255,255,0.15);
+  background: rgba(255, 255, 255, 0.15);
 
   border-radius: 20px;
+
+  overflow: hidden;
 
   margin: 15px 0;
 }
 
 .fill {
   height: 100%;
-  background: linear-gradient(90deg, #22c55e, #eab308);
+
+  border-radius: 20px;
+
+  background: linear-gradient(90deg,
+      #00ff6a,
+      #ffe600);
+
+  transition: width 0.4s ease;
 }
 
-ion-content {
-  --overflow: auto;
+/* =========================================
+   BUTTON GROUP
+========================================= */
 
-  overflow: auto;
-
-  touch-action: auto;
-}
-
-html,
-body,
-ion-app,
-ion-content {
-  height: 100%;
-}
-
-/* BUTTON GROUP */
 .button-group {
-  margin-top: 15px;
-
   display: flex;
   flex-direction: column;
-  gap: 12px;
+
+  gap: 15px;
+
+  margin-top: 20px;
 }
 
-/* BUTTON */
-.custom-btn {
+/* =========================================
+   CUSTOM BUTTON
+========================================= */
 
+.custom-btn {
   width: 100%;
 
-  padding: 16px;
+  padding: 14px;
 
   border: none;
 
-  border-radius: 16px;
+  border-radius: 18px;
 
-  font-size: 18px;
-
-  font-weight: bold;
-
-  color: white;
+  font-size: 16px;
+  font-weight: 700;
 
   cursor: pointer;
 
   transition: 0.3s;
 }
 
-/* EFFECT */
-.custom-btn:active {
-  transform: scale(0.96);
-}
+/* =========================================
+   DETAIL BUTTON
+========================================= */
 
-/* DETAIL BUTTON */
 .detail-btn {
+  background: linear-gradient(90deg,
+      #ffd600,
+      #ffb300);
 
-  background: linear-gradient(
-    45deg,
-    #facc15,
-    #eab308
-  );
-
-  color: black;
-
-  box-shadow:
-    0 8px 25px rgba(250, 204, 21, 0.4);
+  color: #111;
 }
 
-/* SPEAK BUTTON */
-.speak-btn {
-
-  background: linear-gradient(
-    45deg,
-    #22c55e,
-    #16a34a
-  );
-
-  box-shadow:
-    0 8px 25px rgba(34, 197, 94, 0.4);
+.detail-btn:hover {
+  transform: scale(1.02);
 }
 
-/* =========================
-   EXIT ALERT MODERN
-========================= */
+/* =========================================
+   VOICE BUTTON
+========================================= */
 
-.exit-alert {
+.voice-btn {
+  --background: linear-gradient(90deg,
+      #00c853,
+      #00e676);
 
-  --background: transparent;
+  --border-radius: 18px;
+
+  font-weight: 700;
 }
 
-/* BOX */
-.exit-alert .alert-wrapper {
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
 
-  border-radius: 28px !important;
+@media screen and (max-width: 480px) {
 
-  background:
-    rgba(15, 23, 42, 0.92) !important;
-
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
-
-  border:
-    1px solid rgba(255,255,255,0.08);
-
-  box-shadow:
-    0 10px 40px rgba(0,0,0,0.5);
-
-  padding: 10px;
-}
-
-/* TITLE */
-.exit-alert .alert-title {
-
-  color: #facc15 !important;
-
-  font-size: 24px !important;
-
-  font-weight: 800 !important;
-
-  text-align: center;
-}
-
-/* MESSAGE */
-.exit-alert .alert-message {
-
-  color: rgba(255,255,255,0.75) !important;
-
-  text-align: center;
-
-  font-size: 16px !important;
-
-  margin-top: 10px;
-}
-
-/* BUTTON AREA */
-.exit-alert .alert-button-group {
-
-  justify-content: center;
-
-  gap: 12px;
-
-  padding: 15px;
-}
-
-/* BUTTON */
-.exit-alert .alert-button {
-
-  border-radius: 14px !important;
-
-  min-width: 110px;
-
-  height: 45px;
-
-  font-weight: bold;
-
-  text-transform: none;
-}
-
-/* BATAL */
-.exit-alert .cancel-btn {
-
-  background:
-    rgba(255,255,255,0.08) !important;
-
-  color: white !important;
-}
-
-/* KELUAR */
-.exit-alert .exit-btn {
-
-  background:
-    linear-gradient(
-      45deg,
-      #ef4444,
-      #dc2626
-    ) !important;
-
-  color: white !important;
-}
-
-@keyframes fadeUp {
-
-  from {
-
-    opacity: 0;
-
-    transform:
-      translateY(20px);
+  .title {
+    font-size: 34px;
   }
 
-  to {
-
-    opacity: 1;
-
-    transform:
-      translateY(0);
+  .card {
+    height: 170px;
   }
-}
 
-.card,
-.result-card {
+  .card h2 {
+    font-size: 28px;
+  }
 
-  animation:
-    fadeUp 0.4s ease;
+  .icon {
+    font-size: 55px;
+  }
 }

@@ -198,6 +198,7 @@ export class DashboardPage {
 
       if (response.success) {
 
+        // hasil
         this.result =
           response.data.result;
 
@@ -206,25 +207,34 @@ export class DashboardPage {
             response.data.confidence
           );
 
+        // nama pisang
         this.nama =
           this.getNamaPisang(
             this.result
           );
 
+        // informasi
         this.informasi =
           this.getInformasiPisang(
             this.result
           );
 
-        // AUTO SUARA
-        await this.speakResult();
+        // loading selesai dulu
+        this.loading = false;
+
+        // tunggu UI tampil
+        setTimeout(async () => {
+
+          await this.speakResult();
+
+        }, 50);
 
       } else {
 
+        this.loading = false;
+
         alert('Scan gagal');
       }
-
-      this.loading = false;
 
     } catch (error) {
 
@@ -243,7 +253,7 @@ export class DashboardPage {
   ): string {
 
     switch (
-      nama?.toLowerCase()
+    nama?.toLowerCase()
     ) {
 
       case 'ambon':
@@ -272,7 +282,7 @@ export class DashboardPage {
   ): string {
 
     switch (
-      nama?.toLowerCase()
+    nama?.toLowerCase()
     ) {
 
       case 'ambon':

@@ -17,13 +17,7 @@
       <!-- GAMBAR -->
       <div class="image-wrapper">
 
-        <img
-          [src]="item.image"
-          class="history-img"
-          alt="gambar"
-          loading="lazy"
-          referrerpolicy="no-referrer"
-        />
+        <img [src]="item.image" class="history-img" alt="gambar" loading="lazy" referrerpolicy="no-referrer" />
 
       </div>
 
@@ -35,9 +29,7 @@
         <div class="confidence-box">
 
           <div class="confidence-bar">
-            <div
-              class="fill"
-              [style.width.%]="item.confidence">
+            <div class="fill" [style.width.%]="item.confidence">
             </div>
           </div>
 
@@ -54,16 +46,13 @@
       <!-- BUTTON -->
       <div class="button-group">
 
-        <button
-          class="detail-btn"
-          (click)="lihatDetail(item)">
+        <button class="detail-btn" (click)="lihatDetail(item)">
           🔍 Detail
         </button>
 
-        <button
-          class="delete-btn"
-          (click)="hapusRiwayat(item.id)">
-          🗑 Hapus
+        <button class="hapus-btn" (click)="hapusHistory(item.id)">
+          <span>🗑</span>
+          Hapus
         </button>
 
       </div>

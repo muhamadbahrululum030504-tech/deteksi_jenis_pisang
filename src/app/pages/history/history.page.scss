@@ -18,6 +18,7 @@
   border-radius: 24px;
   padding: 14px;
   margin-bottom: 20px;
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255,255,255,0.08);
 }
@@ -108,3 +109,156 @@
   color: white;
 }
 
+/* =======================================
+   CUSTOM ALERT
+======================================= */
+
+.custom-alert {
+
+  --backdrop-opacity: 0.7;
+
+  .alert-wrapper {
+
+    border-radius: 22px !important;
+
+    background: linear-gradient(
+      135deg,
+      #032b2b,
+      #064e3b
+    ) !important;
+
+    color: white !important;
+
+    padding: 10px;
+
+    box-shadow:
+      0 10px 30px rgba(0,0,0,0.5);
+  }
+
+  .alert-head {
+
+    text-align: center;
+  }
+
+  .alert-title {
+
+    font-size: 24px !important;
+
+    font-weight: 700;
+
+    color: #ffd54f !important;
+  }
+
+  .alert-message {
+
+    color: #ffffff !important;
+
+    text-align: center;
+
+    font-size: 16px !important;
+
+    margin-top: 10px;
+  }
+
+  .alert-button-group {
+
+    justify-content: center !important;
+
+    margin-top: 15px;
+  }
+
+  .cancel-btn {
+
+    color: #ffffff !important;
+
+    border: 1px solid rgba(255,255,255,0.3);
+
+    border-radius: 12px;
+
+    padding: 10px 20px;
+  }
+
+  .delete-btn {
+
+    background: #ff4d4d !important;
+
+    color: white !important;
+
+    border-radius: 12px;
+
+    padding: 10px 20px;
+
+    margin-left: 10px;
+  }
+}
+
+/* =========================
+   BUTTON GROUP
+========================= */
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+/* =========================
+   BUTTON DETAIL
+========================= */
+.detail-btn {
+  flex: 1;
+  height: 42px;
+  border: none;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #ffd000, #ffb300);
+  color: #111;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 4px 14px rgba(255, 208, 0, 0.4);
+}
+
+.detail-btn:hover {
+  transform: scale(1.03);
+}
+
+/* =========================
+   BUTTON HAPUS
+========================= */
+.hapus-btn {
+  flex: 1;
+  height: 42px;
+  border: none;
+  border-radius: 14px;
+
+  background: linear-gradient(135deg, #ff4d4d, #d60000);
+
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+
+  box-shadow: 0 4px 14px rgba(255, 0, 0, 0.35);
+}
+
+.hapus-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+
+  box-shadow: 0 8px 18px rgba(255, 0, 0, 0.45);
+}
+
+.hapus-btn:active {
+  transform: scale(0.96);
+}
+
+.hapus-btn span {
+  font-size: 16px;
+}
